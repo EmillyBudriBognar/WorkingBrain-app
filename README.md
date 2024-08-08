@@ -1,50 +1,90 @@
-# Welcome to your Expo app 👋
+Aqui está um exemplo de README para o seu projeto de TCC, o aplicativo de estudos WorkingBrain, inspirado nos exemplos fornecidos:
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+<div align="center">
+  <h1>WorkingBrain - Aplicativo de Estudos</h1>
+</div>
 
-1. Install dependencies
+<div align="center">
+  <img src="https://github.com/EmillyBudriBognar/WorkingBrain-app/blob/master/assets/logo.png" width="200" alt="Logo do WorkingBrain"/>
+</div>
+
+## Sobre o Projeto
+
+O **WorkingBrain** é um aplicativo de estudos gratuito desenvolvido como parte do Trabalho de Conclusão de Curso em Informática. O projeto tem como objetivo facilitar o aprendizado e a organização dos estudos para estudantes de diversas áreas, oferecendo ferramentas e recursos interativos para melhorar a experiência educacional.
+
+### Funcionalidades Principais
+
+- **Organização de Tarefas**: Crie, edite e gerencie suas tarefas e prazos.
+- **Quizzes**: Teste seus conhecimentos com quizzes interativos.
+- **Relatórios de Progresso**: Acompanhe seu desempenho ao longo do tempo.
+  
+## Tecnologias Utilizadas
+
+### Front-end
+- React Native
+- Expo
+- TypeScript
+
+
+### Back-end
+- Java
+- (SUGESTÕES) Express e Node.js
+
+### Banco de Dados
+- (SUGESTÃO) MongoDB
+
+## Como Contribuir
+
+Se você deseja contribuir para o projeto WorkingBrain, siga estas etapas:
+
+1. Faça um fork do repositório.
+2. Crie uma branch com a sua feature (`git checkout -b feature/MinhaFeature`).
+3. Faça commit das suas alterações (`git commit -m 'Adicionando nova feature'`).
+4. Faça push para a sua branch (`git push origin feature/MinhaFeature`).
+5. Abra um pull request.
+
+## Iniciando o Projeto
+
+1. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Inicie o aplicativo:
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   No output, você encontrará opções para abrir o aplicativo em um
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+   - [Emulador Android](https://docs.expo.dev/workflow/android-studio-emulator/)
+   - [Simulador iOS](https://docs.expo.dev/workflow/ios-simulator/)
+   - [Expo Go](https://expo.dev/go)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Aprenda Mais
 
-## Get a fresh project
+Para aprender mais sobre o desenvolvimento do seu projeto com Expo, consulte os seguintes recursos:
 
-When you're ready, run:
+- [Documentação do Expo](https://docs.expo.dev/): Aprenda fundamentos ou explore tópicos avançados com nossos [guias](https://docs.expo.dev/guides).
+- [Tutorial de Expo](https://docs.expo.dev/tutorial/introduction/): Siga um tutorial passo a passo.
 
-```bash
-npm run reset-project
-```
+## Equipe
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Emilly Budri Bognar                   (Designer UI/UX & Desenvolvedora Front-end do App)
+- Douglas Guilherme Moreira de Oliveira (Desenvolvedor Back-end do App)
+- Camila Assis Albuquerque              (Arte Digital)
+- Julia Caetano Bellusci                ()
+- Yasmin da Silva Santos                ()
+- Izabel de Carvalho Borges             ()
 
-## Learn more
+## Contato
 
-To learn more about developing your project with Expo, look at the following resources:
+Para mais informações sobre o projeto, entre em contato:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Email: 
+- Website: [www.workingbrain.com]()
