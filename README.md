@@ -1,6 +1,3 @@
-Aqui está um exemplo de README para o seu projeto de TCC, o aplicativo de estudos WorkingBrain, inspirado nos exemplos fornecidos:
-
----
 
 <div align="center">
   <h1>WorkingBrain - Aplicativo de Estudos</h1>
