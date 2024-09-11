@@ -46,6 +46,33 @@ const App: React.FC = () => {
 
   const keyExtractor = (item: Slide) => item.title;
 
+  // Função para renderizar o botão "Done"
+  const renderDoneButton = () => {
+    return (
+      <View style={styles.rightTextWrapper}>
+        <Text style={styles.rightText}>Feito</Text>
+      </View>
+    );
+  };
+
+  // Função para renderizar o botão "Next"
+  const renderNextButton = () => {
+    return (
+      <View style={styles.rightTextWrapper}>
+        <Text style={styles.rightText}>Próximo</Text>
+      </View>
+    );
+  };
+
+  // Função para renderizar o botão "Prev"
+  const renderPrevButton = () => {
+    return (
+      <View style={styles.leftTextWrapper}>
+        <Text style={styles.leftText}>Voltar</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -53,6 +80,10 @@ const App: React.FC = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         data={data}
+        renderDoneButton={renderDoneButton}
+        renderNextButton={renderNextButton}
+        renderPrevButton={renderPrevButton}
+        showPrevButton
       />
     </View>
   );
@@ -83,6 +114,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#252525',
     textAlign: 'center',
+  },
+  rightTextWrapper: {
+    marginRight: 10,
+  },
+  rightText: {
+    fontSize: 16,
+    color: '#252525',
+    fontWeight: 'bold',
+  },
+  leftTextWrapper: {
+    marginLeft: 10,
+    fontWeight: 'bold',
+  },
+  leftText: {
+    fontSize: 16,
+    color: '#252525',
   },
 });
 
