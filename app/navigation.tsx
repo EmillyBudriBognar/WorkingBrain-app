@@ -12,6 +12,24 @@ export const goToLogin = () => {
   hideSplashScreen();
 };
 
+// Função que redireciona para a tela de Cadastro do Aluno
+export const goToCadastroAluno = () => {
+  router.replace('/cadastroaluno'); 
+  hideSplashScreen();
+};
+
+// Função que redireciona para a tela de Cadastro do Professor
+export const goToCadastroProfessor = () => {
+  router.replace('/cadastroprofessor'); 
+  hideSplashScreen();
+};
+
+// Função que redireciona para a tela de Home
+export const goToHome = () => {
+  router.replace('../(tabs)/home'); 
+  hideSplashScreen();
+};
+
 // Simula a lógica de esconder a splash screen
 export const hideSplashScreen = () => {
   console.log('Splash screen hidden');

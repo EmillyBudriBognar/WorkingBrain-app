@@ -59,6 +59,18 @@ const IntroSlider = () => {
     </View>
   );
 
+  const renderNextButton = () => (
+    <View style={styles.rightTextWrapper}>
+      <Text style={styles.rightText}>Próximo</Text>
+    </View>
+  );
+
+  const renderPrevButton = () => (
+    <View style={styles.leftTextWrapper}>
+      <Text style={styles.leftText}>Voltar</Text>
+    </View>
+  );
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -67,6 +79,8 @@ const IntroSlider = () => {
         renderItem={renderItem}
         data={data}
         renderDoneButton={renderDoneButton}
+        renderNextButton={renderNextButton}
+        renderPrevButton={renderPrevButton} // Adiciona o botão "Voltar"
         showPrevButton // Habilita o botão "Voltar"
       />
     </View>
@@ -112,7 +126,15 @@ const styles = StyleSheet.create({
   },
   rightText: {
     fontSize: width * 0.045,
-    color: '#252525',
+    color: '#262626',
+    fontWeight: 'bold',
+  },
+  leftTextWrapper: {
+    marginLeft: width * 0.03,
+  },
+  leftText: {
+    fontSize: width * 0.045, 
+    color: '#909090',
     fontWeight: 'bold',
   },
 });
