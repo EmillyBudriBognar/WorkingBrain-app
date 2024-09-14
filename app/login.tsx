@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, Alert, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, Alert, TextInput, StyleSheet, TouchableOpacity, Image, Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { goToLogin, goToPreCadastro, goToHome } from "../app/navigation";
 
@@ -8,6 +8,17 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Adicionando estado de autenticação
+  const [windowDimensions, setWindowDimensions] = useState(Dimensions.get('window'));
+
+  // Efeito para atualizar as dimensões da janela
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', ({ window }) => {
+      setWindowDimensions(window);
+    });
+
+    // Cleanup do evento
+    return () => subscription?.remove();
+  }, []);
 
   const handleLoginPress = () => {
     // implementar a lógica de autenticação
@@ -25,6 +36,12 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../assets/images/wallpaper-login.png')}
+        style={[styles.backgroundImage, { width: windowDimensions.width, height: windowDimensions.height }]}
+        resizeMode="cover" 
+      />
+
       <Text style={styles.welcomeText}>Boas-Vindas!</Text>
 
       <TextInput
@@ -65,9 +82,14 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-    padding: 20,
     justifyContent: 'center',
+    position: 'relative', 
+    padding: 20, 
+  },
+  backgroundImage: {
+    position: 'absolute', 
+    top: 0,
+    left: 0,
   },
   welcomeText: {
     fontSize: 24,
@@ -84,6 +106,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#F5F5F5',
     fontSize: 16,
+    width: '90%', 
+    alignSelf: 'center', 
   },
   forgotPasswordText: {
     textAlign: 'right',
@@ -97,6 +121,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
+    width: '90%', 
+    alignSelf: 'center', 
   },
   loginButtonText: {
     color: '#FFF',

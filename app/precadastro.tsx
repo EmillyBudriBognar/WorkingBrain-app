@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { goToLogin, goToCadastroAluno, goToCadastroProfessor } from '../app/navigation'; // Importando as funções de navegação
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Image, Dimensions } from 'react-native';
+import { goToLogin, goToCadastroAluno, goToCadastroProfessor } from '../app/navigation'; 
 
 const SignUpScreen = () => {
   const [role, setRole] = useState<string | null>(null);
+  const [windowDimensions, setWindowDimensions] = useState(Dimensions.get('window'));
 
   // Funções de navegação e ações
   const handleSignUpStudent = () => {
@@ -22,16 +23,23 @@ const SignUpScreen = () => {
     goToLogin(); // Navega para a tela de login
   };
 
-  const handleBackPress = () => {
-    goToLogin(); // Navega para a tela de login
-  };
+  // Efeito para atualizar as dimensões da janela
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', ({ window }) => {
+      setWindowDimensions(window);
+    });
+
+    // Cleanup do evento
+    return () => subscription?.remove();
+  }, []);
 
   return (
     <View style={styles.container}>
-      {/* Botão de Voltar */}
-      <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-        <Text style={styles.backButtonText}>Voltar</Text>
-      </TouchableOpacity>
+      <Image
+        source={require('../assets/images/wallpaper-pre.png')} 
+        style={[styles.backgroundImage, { width: windowDimensions.width, height: windowDimensions.height }]}
+        resizeMode="cover" 
+      />
 
       <Text style={styles.title}>Gostaria de me cadastrar como:</Text>
       
@@ -55,7 +63,6 @@ const SignUpScreen = () => {
         <Text style={styles.buttonText}>Professor</Text>
       </TouchableOpacity>
 
-      {/* Link para Login */}
       <TouchableOpacity onPress={handleLoginPress} activeOpacity={0.8}>
         <Text style={styles.loginText}>
           Já possui conta? <Text style={styles.loginLink}>Entrar</Text>
@@ -73,9 +80,14 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     justifyContent: 'center',
     padding: 20,
+    position: 'relative', 
+  },
+  backgroundImage: {
+    position: 'absolute', 
+    top: 0,
+    left: 0,
   },
   backButton: {
     padding: 10,
