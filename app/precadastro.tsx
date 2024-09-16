@@ -46,7 +46,7 @@ const SignUpScreen = () => {
       {/* Botão Aluno */}
       <TouchableOpacity 
         style={[styles.button, styles.studentButton]}
-        onPress={handleSignUpStudent}
+        onPress={goToCadastroAluno}
         accessibilityLabel="Cadastrar como Aluno"
         activeOpacity={0.8}
       >
@@ -56,7 +56,7 @@ const SignUpScreen = () => {
       {/* Botão Professor */}
       <TouchableOpacity 
         style={[styles.button, styles.teacherButton]}
-        onPress={handleSignUpTeacher}
+        onPress={goToCadastroProfessor}
         accessibilityLabel="Cadastrar como Professor"
         activeOpacity={0.8} 
       >

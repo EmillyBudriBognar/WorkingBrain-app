@@ -14,13 +14,13 @@ export const goToLogin = () => {
 
 // Função que redireciona para a tela de Cadastro do Aluno
 export const goToCadastroAluno = () => {
-  router.replace('/cadastroaluno'); 
+  router.replace('/sobremimaluno'); 
   hideSplashScreen();
 };
 
 // Função que redireciona para a tela de Cadastro do Professor
 export const goToCadastroProfessor = () => {
-  router.replace('/cadastroprofessor'); 
+  router.replace('/sobremimprofessor'); 
   hideSplashScreen();
 };
 
