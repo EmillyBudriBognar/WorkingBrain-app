@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Dimensions, Image, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { goToLogin } from '../app/navigation';
+import { Ionicons } from '@expo/vector-icons';  // Import para ícones
+import { goToPreCadastro } from './navigation';
 
 const { width } = Dimensions.get('window');
 
@@ -41,30 +42,30 @@ export default function Cadastro() {
       return true;
     }
   };
-
+  
   const handleContinue = () => {
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
-
-    if (isEmailValid && isPasswordValid) {
-      if (currentStep < 3) {
+  
+    if (currentStep < 2) {
+      setCurrentStep((prevStep) => (prevStep + 1) as Step);
+    } else if (currentStep === 2) {
+      if (isEmailValid && isPasswordValid) {
         setCurrentStep((prevStep) => (prevStep + 1) as Step);
       } else {
-        router.push('/login');
+        alert("Por favor, insira um email e senha válidos."); 
       }
+    } else {
+      handleFinalize(); // Finaliza o processo
     }
+  };
+  
+  const handleFinalize = () => {
+    router.push('/login');
   };
 
   const handleStepPress = (step: Step) => {
     setCurrentStep(step);
-  };
-
-  const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prevStep) => (prevStep - 1) as Step);
-    } else {
-      router.back();
-    }
   };
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
@@ -73,15 +74,13 @@ export default function Cadastro() {
     setDate(currentDate);
   };
 
-  const renderCheckbox = (text: string, value: string, onPress: () => void) => (
+  const renderCheckbox = (text: string, value: string, onPress: () => void, selectedValue: string | null) => (
     <TouchableOpacity
-      style={[
-        styles.checkbox,
-        (selectedOccupation === value || preference === value) ? styles.selectedCheckbox : {},
-      ]}
+      key={value}
+      style={[styles.checkbox, selectedValue === value && styles.selectedCheckbox]}
       onPress={onPress}
     >
-      <Text style={(selectedOccupation === value || preference === value) ? styles.selectedText : {}}>{text}</Text>
+      <Text style={selectedValue === value ? styles.selectedText : styles.checkboxText}>{text}</Text>
     </TouchableOpacity>
   );
 
@@ -90,6 +89,11 @@ export default function Cadastro() {
       source={require('../assets/images/wallpaper-cadastro-aluno.png')}
       style={styles.background}
     >
+      {/* Botão circular de voltar */}
+      <TouchableOpacity style={styles.backButton} onPress={goToPreCadastro}>
+        <Ionicons name="arrow-back" size={24} color="#fff" />
+      </TouchableOpacity>
+
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
           <View style={styles.progressBar}>
@@ -134,9 +138,9 @@ export default function Cadastro() {
                 )}
                 <Text style={styles.label}>Ocupação:</Text>
                 <View style={styles.checkboxContainer}>
-                  {renderCheckbox('Estudante Fund. 2', 'estudanteFund', () => setSelectedOccupation('estudanteFund'))}
-                  {renderCheckbox('Estudante Ensino Médio', 'ensinoMedio', () => setSelectedOccupation('ensinoMedio'))}
-                  {renderCheckbox('Vestibulando', 'vestibulando', () => setSelectedOccupation('vestibulando'))}
+                  {renderCheckbox('Estudante do Ensino Fundamental 2', 'estudanteFund', () => setSelectedOccupation('estudanteFund'), selectedOccupation)}
+                  {renderCheckbox('Estudante do Ensino Médio', 'ensinoMedio', () => setSelectedOccupation('ensinoMedio'), selectedOccupation)}
+                  {renderCheckbox('Vestibulando', 'vestibulando', () => setSelectedOccupation('vestibulando'), selectedOccupation)}
                 </View>
               </>
             )}
@@ -180,8 +184,8 @@ export default function Cadastro() {
               <>
                 <Text style={styles.label}>Tenho preferência por:</Text>
                 <View style={styles.checkboxContainer}>
-                  {renderCheckbox('Seguir um cronograma de estudos convencional', 'convencional', () => setPreference('convencional'))}
-                  {renderCheckbox('Seguir um cronograma de estudos adaptado para mim', 'adaptado', () => setPreference('adaptado'))}
+                  {renderCheckbox('Seguir um cronograma de estudos convencional', 'convencional', () => setPreference('convencional'), preference)}
+                  {renderCheckbox('Seguir um cronograma de estudos adaptado para mim', 'adaptado', () => setPreference('adaptado'), preference)}
                 </View>
                 <Image
                   source={require('../assets/images/cronograma.png')}
@@ -196,7 +200,7 @@ export default function Cadastro() {
           </TouchableOpacity>
 
           <View style={styles.footer}>
-            <TouchableOpacity onPress={goToLogin} activeOpacity={0.8}>
+            <TouchableOpacity onPress={() => router.push('/login')} activeOpacity={0.8}>
               <Text style={styles.footerText}>
                 Já tem uma conta? <Text style={styles.loginLink}>Login</Text>
               </Text>
@@ -215,18 +219,31 @@ const styles = StyleSheet.create({
   },
   container: {
     flexGrow: 1,
-    padding: 20,
+    paddingHorizontal: 20,
   },
   card: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 20,
+    marginTop: 100, 
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 4,
     width: width - 40,
     alignSelf: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 10,
+    width: 40,
+    height: 40,
+    backgroundColor: '#007bff',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   progressBar: {
     flexDirection: 'row',
@@ -244,62 +261,74 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeStepCircle: {
-    backgroundColor: '#407BFF',
+    backgroundColor: '#007bff',
   },
   inactiveStepCircle: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#ccc',
   },
   stepNumber: {
     color: '#fff',
+    fontWeight: 'bold',
   },
   stepLabel: {
     marginTop: 5,
+    fontSize: 12,
   },
   activeStepLabel: {
-    color: '#407BFF',
+    color: '#007bff',
   },
   inactiveStepLabel: {
-    color: '#999',
+    color: '#000',
   },
   form: {
     marginBottom: 20,
   },
   label: {
+    fontSize: 16,
     marginBottom: 5,
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 8,
+    borderRadius: 4,
     padding: 10,
     marginBottom: 15,
   },
   checkboxContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
+    marginBottom: 15,
+    justifyContent: 'center',
   },
   checkbox: {
-    padding: 10,
+    flex: 1,
     borderWidth: 1,
-    borderRadius: 8,
+    borderColor: '#D3D3D3',
+    borderRadius: 4,
+    padding: 10,
     margin: 5,
-    borderColor: '#ccc',
+    alignItems: 'center',
   },
   selectedCheckbox: {
-    borderColor: '#407BFF',
-    backgroundColor: '#E8F0FE',
+    backgroundColor: '#007bff',
   },
   selectedText: {
-    color: '#407BFF',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  checkboxText: {
+    color: '#000',
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#407BFF',
-    paddingVertical: 15,
-    borderRadius: 8,
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 5,
     alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   footer: {
@@ -307,21 +336,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#666',
+    fontSize: 14,
+    color: '#000',
   },
   loginLink: {
-    color: '#407BFF',
     fontWeight: 'bold',
+    color: '#007bff',
   },
   errorText: {
     color: 'red',
     marginBottom: 10,
   },
   finalImage: {
-    width: 300,
+    width: '100%',
     height: 200,
+    marginTop: 10,
     resizeMode: 'contain',
-    alignSelf: 'center',
-    marginVertical: 20,
   },
 });

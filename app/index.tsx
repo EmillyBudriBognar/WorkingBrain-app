@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StatusBar, Image, StyleSheet, ImageSourcePropType, Dimensions, TouchableOpacity } from "react-native";
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
-import { goToLogin, goToPreCadastro } from "../app/navigation";
+import { goToLogin } from "../app/navigation";
+import SplashScreen from '../components/Splashscreen'; 
 
 // Pegando as dimensões da tela do dispositivo
 const { width } = Dimensions.get('window');
@@ -87,9 +88,26 @@ const IntroSlider = () => {
   );
 };
 
+// Componente principal do aplicativo
 const App = () => {
+  const [isSplashVisible, setSplashVisible] = useState(true);
+
+  const handleFinish = () => {
+    setSplashVisible(false); // Esconde a splash screen
+  };
+
+  useEffect(() => {
+    // Aqui você pode adicionar qualquer lógica que deseja executar antes de esconder a splash screen
+  }, []);
+
   return (
-      <IntroSlider />
+    <View style={{ flex: 1 }}>
+      {isSplashVisible ? (
+        <SplashScreen onFinish={handleFinish} />
+      ) : (
+        <IntroSlider />
+      )}
+    </View>
   );
 };
 
@@ -103,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     resizeMode: 'contain',
-    marginTop: -100,
+    marginTop: -40,
   },
   textContainer: {
     alignItems: 'center',
@@ -133,7 +151,7 @@ const styles = StyleSheet.create({
     marginLeft: width * 0.03,
   },
   leftText: {
-    fontSize: width * 0.045, 
+    fontSize: width * 0.045,
     color: '#909090',
     fontWeight: 'bold',
   },

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Dimensions, ImageBackground } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons'; // Import para ícones
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { goToPreCadastro } from './navigation';
 
 const { width } = Dimensions.get('window');
 
@@ -26,36 +28,40 @@ export default function Cadastro() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       setEmailError('Por favor, insira um e-mail válido.');
+      return false;
     } else {
       setEmailError('');
+      return true;
     }
   };
 
   const validatePassword = () => {
     if (password !== confirmPassword) {
       setPasswordError('As senhas não coincidem.');
+      return false;
     } else {
       setPasswordError('');
+      return true;
     }
   };
-
+  
   const handleContinue = () => {
-    validateEmail();
-    validatePassword();
-
-    if (!emailError && !passwordError && currentStep < 2) {
+    const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
+  
+    if (currentStep < 2) {
       setCurrentStep((prevStep) => (prevStep + 1) as Step);
-    } else if (!emailError && !passwordError) {
-      router.push('/login');
+    } else if (currentStep === 2) {
+      if (isEmailValid && isPasswordValid) {
+        handleFinalize(); // Finaliza o processo
+      } else {
+        alert("Por favor, insira um email e senha válidos."); 
+      }
     }
   };
-
-  const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prevStep) => (prevStep - 1) as Step);
-    } else {
-      router.back();
-    }
+  
+  const handleFinalize = () => {
+    router.push('/login');
   };
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
@@ -65,7 +71,7 @@ export default function Cadastro() {
   };
 
   const handleCvUpload = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
+    const result = await DocumentPicker.getDocumentAsync({
       type: 'application/pdf',
     });
 
@@ -122,6 +128,10 @@ export default function Cadastro() {
 
   return (
     <ImageBackground source={require('../assets/images/wallpaper-cadastro-professor.png')} style={styles.background}>
+      {/* Botão circular de voltar */}
+      <TouchableOpacity style={styles.backButton} onPress={(goToPreCadastro)}>
+        <Ionicons name="arrow-back" size={24} color="#fff" />
+      </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
           <View style={styles.progressBar}>
@@ -175,6 +185,7 @@ export default function Cadastro() {
               <>
                 <Text style={styles.label}>Celular:</Text>
                 <TextInput style={styles.input} placeholder="(11) 99999-9999" keyboardType="phone-pad" />
+                
                 <Text style={styles.label}>E-mail:</Text>
                 <TextInput
                   style={styles.input}
@@ -206,16 +217,12 @@ export default function Cadastro() {
                   onBlur={validatePassword}
                 />
                 {passwordError ? <Text style={styles.errorMessage}>{passwordError}</Text> : null}
-
-                <TouchableOpacity style={styles.checkemail}>
-                  <Text>Eu gostaria de receber informações por e-mail</Text>
-                </TouchableOpacity>
               </>
             )}
           </View>
 
           {/* Footer dentro do card */}
-          <View style={[styles.footerText, styles.footer]}>
+          <View style={styles.footer}>
             <TouchableOpacity style={styles.button} onPress={handleContinue}>
               <Text style={styles.buttonText}>
                 {currentStep === 2 ? 'Finalizar cadastro' : 'Continuar'}
@@ -244,12 +251,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 10,
+    width: 40,
+    height: 40,
+    backgroundColor: '#E85B81',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   card: {
-    backgroundColor: 'white',
-    borderRadius: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 15,
     padding: 20,
-    width: width * 0.9,
-    elevation: 5,
+    width: width - 40,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+    marginTop: 100,
   },
   progressBar: {
     flexDirection: 'row',
@@ -265,101 +289,90 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 5,
   },
   activeStepCircle: {
     backgroundColor: '#E85B81',
   },
   inactiveStepCircle: {
-    backgroundColor: '#D3D3D3',
+    backgroundColor: '#e0e0e0',
   },
   stepNumber: {
-    color: 'white',
+    color: '#fff',
     fontWeight: 'bold',
   },
   stepLabel: {
-    fontSize: 12,
+    marginTop: 5,
+    fontSize: 14,
   },
   activeStepLabel: {
     color: '#E85B81',
-    fontWeight: 'bold',
   },
   inactiveStepLabel: {
-    color: '#A9A9A9',
+    color: '#888',
   },
   form: {
     marginBottom: 20,
   },
   label: {
-    marginVertical: 5,
-    fontWeight: 'bold',
+    fontSize: 16,
+    marginVertical: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#D3D3D3',
-    borderRadius: 5,
+    borderColor: '#ccc',
+    borderRadius: 4,
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 15,
   },
   errorMessage: {
     color: 'red',
     fontSize: 12,
+    marginVertical: 5,
   },
   checkboxContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginVertical: 10,
   },
   checkbox: {
-    borderWidth: 1,
-    borderColor: '#D3D3D3',
-    borderRadius: 5,
+    width: '48%',
     padding: 10,
-    margin: 5,
-    width: '45%',
-  },
-  checkemail: {
+    margin: '1%',
+    borderColor: '#ccc',
     borderWidth: 1,
-    borderColor: '#D3D3D3',
     borderRadius: 5,
-    padding: 10,
-    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   selectedCheckbox: {
     backgroundColor: '#E85B81',
   },
   checkboxText: {
-    color: 'black',
+    color: '#000',
   },
   selectedText: {
-    color: 'white',
+    color: '#fff',
   },
   uploadButton: {
-    backgroundColor: '#F5A7B8', // Cor de fundo mais clara
+    backgroundColor: '#E85B81',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
     marginVertical: 10,
-    shadowColor: '#000', // Cor da sombra
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2, // Opacidade da sombra
-    shadowRadius: 4, // Raio de desfoque da sombra
-    elevation: 5, // Para Android
   },
-  
   uploadButtonText: {
-    color: '#550319',
-    fontWeight: 'bold',
+    color: '#fff',
   },
   cvFileName: {
-    marginTop: 5,
-    color: '#555',
+    marginVertical: 5,
   },
   successMessage: {
     color: 'green',
-    marginTop: 5,
+  },
+  footer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 20,
   },
   button: {
     backgroundColor: '#E85B81',
@@ -367,20 +380,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginVertical: 10,
+    width: '100%',
   },
   buttonText: {
-    color: 'white',
+    color: '#fff',
     fontWeight: 'bold',
-  },
-  footer: {
-    marginTop: 10,
-    alignItems: 'center',
+    fontSize: 16,
   },
   footerText: {
-    color: '#666',
-    marginTop: 20,
-  },
-  loginLink: {
-    fontWeight: 'bold',
+    color: '#000',
   },
 });
