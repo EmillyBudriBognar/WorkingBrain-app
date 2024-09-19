@@ -31,13 +31,19 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: '#407BFF',
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: '#9A9AAB',
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'white',
+          backgroundColor: '#E1E1E1',
           borderTopWidth: 0,
-          elevation: 0, // Remove shadow for Android
-          height: 65, // Aumenta a altura da tab bar
+          elevation: 3, // Remove shadow for Android
+          height: 70, // Aumenta a altura da tab bar
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.2,
+          shadowRadius: 1.5,
         },
         tabBarLabelStyle: {
           fontSize: 14, // Aumenta o tamanho da fonte do rótulo
@@ -60,7 +66,7 @@ export default function TabLayout() {
         options={{
           title: 'Inscrições',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={30} name="list" color={color} /> // Aumenta o ícone
+            <FontAwesome size={23} name="list" color={color} /> // Aumenta o ícone
           ),
         }}
       />
@@ -69,9 +75,7 @@ export default function TabLayout() {
         options={{
           title: 'Desafios',
           tabBarIcon: ({ color }) => (
-            <Animated.View style={{ transform: [{ scale }] }}>
-              <FontAwesome size={30} name="gamepad" color={color} /> // Ícone de game aumentado
-            </Animated.View>
+              <FontAwesome size={30} name="gamepad" color={color}/>
           ),
         }}
       />
@@ -80,7 +84,7 @@ export default function TabLayout() {
         options={{
           title: 'Meu Perfil',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={30} name="user" color={color} /> // Aumenta o ícone
+            <FontAwesome size={27} name="user" color={color} /> // Aumenta o ícone
           ),
         }}
       />

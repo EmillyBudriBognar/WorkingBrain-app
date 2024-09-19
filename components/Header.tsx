@@ -1,158 +1,105 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Button } from 'react-native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { goToCronograma } from '../app/navigation'; // Importe a função de navegação
+import { View, Text, Image, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import { goToCronograma } from '@/app/navigation';
 
-// Define o tipo para o estado do usuário
-interface User {
-  name: string;
-  avatarUri: string;
-}
+const HeaderComponent = () => {
+  const [searchQuery, setSearchQuery] = useState(''); // Estado para a consulta de pesquisa
 
-const Header: React.FC = () => {
-  // Estado inicial para o usuário
-  const [user, setUser] = useState<User>({
-    name: 'USERNAME', // Nome do usuário inicial
-    avatarUri: 'https://via.placeholder.com/50', // URL do avatar inicial
-  });
-
-  const [newName, setNewName] = useState<string>('');
-  const [newAvatarUri, setNewAvatarUri] = useState<string>('');
-
-  const todayDate = new Date().toLocaleDateString(); // Obtém a data atual
-
-  // Função para atualizar o nome e o avatar
-  const updateUserInfo = () => {
-    if (newName.trim() !== '') {
-      setUser(prevUser => ({
-        ...prevUser,
-        name: newName,
-      }));
-    }
-    if (newAvatarUri.trim() !== '') {
-      setUser(prevUser => ({
-        ...prevUser,
-        avatarUri: newAvatarUri,
-      }));
-    }
+  // Função que trata a pesquisa
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    // Aqui você pode filtrar ou realizar a busca com base nessa consulta
+    console.log('Consulta de Pesquisa:', query);
   };
 
   return (
-    <View style={styles.header}>
-      <View style={styles.userInfo}>
-        <Image
-          source={{ uri: user.avatarUri }} // Usa a URL do avatar do estado
-          style={styles.avatar}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.greeting}>Hello, {user.name}</Text> {/* Usa o nome do estado */}
-          <Text style={styles.date}>{todayDate}</Text> {/* Mostra a data atual */}
-        </View>
-        <TouchableOpacity style={styles.calendarButton} onPress={goToCronograma}>
-          <FontAwesome name="calendar" size={20} color="#FFF" />
-          <Text style={styles.calendarText}>Hoje</Text>
-        </TouchableOpacity>
+    <View style={styles.headerContainer}>
+      {/* Seção Esquerda: Avatar */}
+      <View style={styles.leftSection}>
+      <Image
+        source={require('../assets/images/user.png')} // Caminho correto da imagem local
+        style={styles.avatar}
+      />
+        <Text style={styles.greetingText}>ALUNO</Text>
       </View>
+
+      {/* Seção Direita: Ícone de Calendário */}
+      <TouchableOpacity style={styles.calendarSection} onPress={goToCronograma}>
+        <Ionicons name="calendar-outline" size={32} color="#fff" />
+        <Text style={styles.calendarText}>HOJE</Text>
+      </TouchableOpacity>
+
+      {/* Barra de Pesquisa */}
       <View style={styles.searchContainer}>
-        <TextInput 
-          style={styles.searchInput} 
-          placeholder="Pesquisar" 
-        />
-        <TouchableOpacity style={styles.searchButton}>
-          <Ionicons name="search" size={20} color="#B0B0B0" />
-        </TouchableOpacity>
-      </View>
-      {/* Adiciona campos para atualizar o nome e o avatar */}
-      <View style={styles.updateContainer}>
+        <Ionicons name="search-outline" size={20} color="#aaa" style={styles.searchIcon} />
         <TextInput
-          style={styles.input}
-          placeholder="Novo nome"
-          value={newName}
-          onChangeText={setNewName}
+          style={styles.searchInput}
+          placeholder="Pesquisar"
+          placeholderTextColor="#aaa"
+          value={searchQuery}
+          onChangeText={handleSearch} // Isso aciona a função handleSearch
         />
-        <TextInput
-          style={styles.input}
-          placeholder="URL do novo avatar"
-          value={newAvatarUri}
-          onChangeText={setNewAvatarUri}
-        />
-        <View style={styles.buttonContainer}>
-          <Button title="Atualizar Info" onPress={updateUserInfo} />
-        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    padding: 16,
-    backgroundColor: '#4A90E2',
+  headerContainer: {
+    backgroundColor: '#5a9bfc', // Ajuste a cor de fundo com base no design
+    padding: 18,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    height: 162,
+    marginTop: -30,
   },
-  userInfo: {
+  leftSection: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
+    marginTop: 22,
   },
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 16,
+    marginRight: 10,
   },
-  textContainer: {
-    flex: 1,
-  },
-  greeting: {
+  greetingText: {
     fontSize: 18,
-    color: '#FFF',
+    color: '#fff',
+    fontWeight: 'bold',
   },
-  date: {
-    fontSize: 14,
-    color: '#FFF',
-  },
-  calendarButton: {
-    flexDirection: 'row',
+  calendarSection: {
+    position: 'absolute',
+    right: 16,
+    top: 16,
     alignItems: 'center',
-    marginLeft: 16,
+    marginTop: 22,
   },
   calendarText: {
+    color: '#fff',
     fontSize: 14,
-    color: '#FFF',
-    marginLeft: 4,
-    marginTop: 4,
+    fontWeight: 'bold',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: '#fff',
     borderRadius: 25,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.5,
-    elevation: 3,
+    paddingHorizontal: 10,
+    height: 40,
+  },
+  searchIcon: {
+    marginRight: 8,
   },
   searchInput: {
     flex: 1,
-  },
-  searchButton: {
-    marginLeft: 8,
-  },
-  updateContainer: {
-    marginTop: 16,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCC',
-    marginBottom: 8,
-    paddingHorizontal: 8,
-  },
-  buttonContainer: {
-    marginTop: 8,
+    fontSize: 16,
+    color: '#000',
   },
 });
 
-export default Header;
+export default HeaderComponent;

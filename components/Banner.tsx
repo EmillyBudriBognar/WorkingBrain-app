@@ -11,7 +11,7 @@ const Banner = () => {
           <Text style={styles.subtitle}>Um pequeno passo a cada dia leva a grandes conquistas!</Text>
         </View>
         <Image
-          source={require('../assets/images/boneco1.png')} // Caminho para a imagem local
+          source={require('../assets/images/boneco1.png')} 
           style={styles.image}
         />
       </View>
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
     padding: 16,
     marginHorizontal: 16,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: '#787878',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 2,
   },
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    marginLeft: 12, // Ajustado para garantir espaçamento correto
+    marginLeft: 12,
+    marginTop: -12,
   },
   textContainer: {
     flex: 1,
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
+    marginTop: -8,
     color: '#D14987',
     textTransform: 'uppercase',
   },
@@ -59,12 +61,11 @@ const styles = StyleSheet.create({
     color: '#252525',
   },
   button: {
-    backgroundColor: '#D37DA4',
+    backgroundColor: '#F490AA',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
-    marginTop: 8, // Adicionado espaço entre o texto e o botão
   },
   buttonText: {
     color: '#FFF',

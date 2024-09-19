@@ -26,31 +26,37 @@ export const goToCadastroProfessor = () => {
 
 // Função que redireciona para a tela de Home
 export const goToHome = () => {
-  router.replace('../(tabs-aluno)/home'); 
+  router.replace('../aluno/(tabs)/home'); 
   hideSplashScreen();
 };
 
 // Função que redireciona para a tela de Inscrições
 export const goToInscricoes = () => {
-  router.replace('../(tabs-aluno)/inscricoes'); 
+  router.replace('../aluno/(tabs)/inscricoes'); 
   hideSplashScreen();
 };
 
 // Função que redireciona para a tela de Desafios
 export const goToDesafios = () => {
-  router.replace('../(tabs-aluno)/desafios'); 
+  router.replace('../aluno/(tabs)/desafios'); 
   hideSplashScreen();
 };
 
 // Função que redireciona para a tela de Perfil
 export const goToProfile= () => {
-  router.replace('../(tabs-aluno)/profile'); 
+  router.replace('../aluno/(tabs)/profile'); 
   hideSplashScreen();
 };
 
 // Função que redireciona para a tela de Desafio Diário
 export const goToDesafioDiario = () => {
   router.replace('/desafiodiario'); 
+  hideSplashScreen();
+};
+
+// Função que redireciona para a tela de Matérias
+export const goToMaterias = () => {
+  router.replace('/materias'); 
   hideSplashScreen();
 };
 
