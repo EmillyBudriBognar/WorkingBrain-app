@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     borderTopLeftRadius: 1,
     alignItems: 'center',
-    padding: 10,
-    marginHorizontal: 5,
-    width: screenWidth * 0.3,
-    shadowColor: '#878787',
+    padding: 30,
+    width: screenWidth * 0.4,
+    shadowColor: '#252525',
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.5, // Corrigido para estar dentro do intervalo permitido
-    elevation: 3,
+    elevation: 6,
+    margin: 8,
   },
   circle: {
     width: 60,

@@ -48,7 +48,7 @@ const HeaderComponent = () => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: '#5a9bfc', // Ajuste a cor de fundo com base no design
+    backgroundColor: '#4D81F7', 
     padding: 18,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,

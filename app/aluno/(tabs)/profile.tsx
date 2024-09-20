@@ -1,19 +1,49 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import SimpleHeader from '../../../components/SimpleHeader';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 
 const ProfileScreen = () => {
+  const SimpleHeader = ({ title }: { title: string }) => (
+    <View style={headerStyles.container}>
+      <Text style={headerStyles.title}>{title}</Text>
+    </View>
+  );
+
   return (
-    <SafeAreaView style={styles.container}>
-      <SimpleHeader />
+    <View style={styles.container}>
+      <SimpleHeader title="Meu Perfil" />
+
       <ScrollView>
         <Text style={styles.sectionHeader}>Para você...</Text>
+        {/* Adicionar mais conteúdo aqui conforme necessário */}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
+// Estilos para o SimpleHeader
+const headerStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4D81F7',
+    padding: 18,
+    paddingTop: 58,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    height: 100,
+    marginTop: -30,
+  },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+});
+
+// Estilos gerais da tela ProfileScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // Expo icons
 
-const CustomHeader = (customProps) => {
-    const { title, iconName, onPress } = customProps;
+interface SimpleHeaderProps {
+  title: string; // Título dinâmico
+  onBackPress: () => void; // Função de voltar dinâmica
+}
 
+const SimpleHeader: React.FC<SimpleHeaderProps> = ({ title, onBackPress }) => {
   return (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={onPress} style={styles.iconContainer}>
-        <MaterialIcons name={iconName} size={24} color="white" /> 
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color="#4D81F7" />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
     </View>
@@ -16,30 +19,33 @@ const CustomHeader = (customProps) => {
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#5a9bfc',
-    padding: 10,
+    backgroundColor: '#4D81F7',
+    padding: 18,
+    paddingTop: 35,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    height: 110,
+    height: 100,
     marginTop: -30,
   },
-  iconContainer: {
+  backButton: {
+    padding: 10,
+    borderRadius: 50,
     backgroundColor: 'white',
-    borderRadius: 20,
-    width: 40,
-    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
+    flex: 1,
+    textAlign: 'right',
     color: 'white',
-    fontSize: 18,
+    marginRight: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginLeft: 10,
+    textTransform: 'uppercase',
   },
 });
 
-export default CustomHeader;
+export default SimpleHeader;
