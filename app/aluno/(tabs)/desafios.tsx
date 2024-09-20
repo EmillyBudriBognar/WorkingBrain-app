@@ -8,7 +8,7 @@ const DesafiosScreen = () => {
     <SafeAreaView style={styles.container}>
       <Header />
       <ScrollView>
-        <Text style={styles.sectionHeader}>Para você...</Text>
+        <Text style={styles.sectionHeader}>Desafie-se</Text>
       </ScrollView>
     </SafeAreaView>
   );

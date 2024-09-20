@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { goToDesafioDiario } from "../app/navigation";
+import { goToDesafioDiario, goToDesafios } from "../app/navigation";
 
 const Banner = () => {
   return (

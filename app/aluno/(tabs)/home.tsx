@@ -2,7 +2,6 @@ import React from 'react';
 import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
-import SearchBar from '../../../components/SearchBar';
 import Banner from '../../../components/Banner';
 import MateriasCarousel from '../../../components/MateriasCarousel'; 
 import { goToMaterias } from '@/app/navigation';
