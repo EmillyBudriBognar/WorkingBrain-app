@@ -30,7 +30,7 @@ const headerStyles = StyleSheet.create({
     paddingTop: 58,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    height: 100,
+    height: 120,
     marginTop: -30,
   },
   title: {
