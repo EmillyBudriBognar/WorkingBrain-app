@@ -308,6 +308,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     alignItems: 'center',
+    width: "98%",
   },
   selectedCheckbox: {
     backgroundColor: '#007bff',
