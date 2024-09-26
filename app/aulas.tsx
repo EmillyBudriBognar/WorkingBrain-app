@@ -7,9 +7,9 @@ import { goToHome } from './navigation';
 const InscricoesScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <SimpleHeader title='cronograma' onBackPress={goToHome} />
+      <SimpleHeader title='aulas disponíveis' onBackPress={goToHome} />
       <ScrollView>
-
+    
       </ScrollView>
     </SafeAreaView>
   );

@@ -51,19 +51,19 @@ const ProfileScreen = () => {
           <View style={styles.performanceMetrics}>
             <View style={styles.metricBox}>
               <View style={[styles.circle, styles.blueCircle]}>
-                <Text style={styles.metricValue}>60</Text>
+                <Text style={styles.metricValue}>--</Text>
               </View>
               <Text style={styles.metricLabel}>Completos</Text>
             </View>
             <View style={styles.metricBox}>
               <View style={[styles.circle, styles.greenCircle]}>
-                <Text style={styles.metricValue}>31</Text>
+                <Text style={styles.metricValue}>--</Text>
               </View>
               <Text style={styles.metricLabel}>Acertos</Text>
             </View>
             <View style={styles.metricBox}>
               <View style={[styles.circle, styles.redCircle]}>
-                <Text style={styles.metricValue}>29</Text>
+                <Text style={styles.metricValue}>--</Text>
               </View>
               <Text style={styles.metricLabel}>Erros</Text>
             </View>

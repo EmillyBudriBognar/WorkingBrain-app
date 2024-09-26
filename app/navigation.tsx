@@ -66,6 +66,13 @@ export const goToCronograma = () => {
   hideSplashScreen();
 };
 
+// Função que redireciona para a tela de Aulas
+export const goToAulas = () => {
+  router.replace('/aulas'); 
+  hideSplashScreen();
+};
+
+
 // Simula a lógica de esconder a splash screen
 export const hideSplashScreen = () => {
   console.log('Splash screen hidden');

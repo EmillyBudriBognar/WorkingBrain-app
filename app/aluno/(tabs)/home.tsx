@@ -5,6 +5,9 @@ import Header from '../../../components/Header';
 import Banner from '../../../components/Banner';
 import MateriasCarousel from '../../../components/MateriasCarousel'; 
 import { goToMaterias } from '@/app/navigation';
+import CardAula from '@/components/CardAula';
+import { goToAulas } from '@/app/navigation';
+import CardAulaCarousel from '@/components/CardAulaCarousel';
 
 const HomeScreen = () => {
   return (
@@ -23,7 +26,15 @@ const HomeScreen = () => {
         <View style={styles.carouselContainer}>
           <MateriasCarousel />
         </View>
-
+        <View style={styles.materiasHeaderContainer}>
+          <Text style={styles.sectionHeader}>Últimas Atualizações</Text>
+          <TouchableOpacity onPress={goToAulas}>
+            <Text style={styles.verTodas}>VER TODAS</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.cardContainer}>
+        <CardAulaCarousel/>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -56,6 +67,10 @@ const styles = StyleSheet.create({
   carouselContainer: {
     marginTop: 8,
     marginLeft: -58, 
+  },
+  cardContainer: {
+    marginHorizontal: 15,  // Adicionando margin ao CardAula
+    marginBottom: 20,
   },
 });
 
