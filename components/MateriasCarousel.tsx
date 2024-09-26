@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     width: screenWidth * 0.3,
     shadowColor: '#878787',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.5,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 3 }, // Aumentando a altura para espalhar mais
+    shadowOpacity: 0.8, // Aumentando a opacidade da sombra
+    shadowRadius: 10, // Adicionando um raio de sombra para suavizar
+    elevation: 5, // Aumentando a elevação para Android
   },
   circle: {
     width: 60,
