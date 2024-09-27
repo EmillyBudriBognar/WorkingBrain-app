@@ -37,7 +37,7 @@ export default function TabLayout() {
           backgroundColor: '#E1E1E1',
           borderTopWidth: 0,
           elevation: 3, // Remove shadow for Android
-          height: 70, // Aumenta a altura da tab bar
+          height: 75, // Aumenta a altura da tab bar
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
           shadowColor: '#000',

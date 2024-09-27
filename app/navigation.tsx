@@ -72,6 +72,17 @@ export const goToAulas = () => {
   hideSplashScreen();
 };
 
+// Função que redireciona para a tela de Todos os Desafios
+export const goToVerDesafios = () => {
+  router.replace('/todosdesafios'); 
+  hideSplashScreen();
+};
+
+// Função que redireciona para a tela de Insígnias
+export const goToInsignias = () => {
+  router.replace('/insignias'); 
+  hideSplashScreen();
+};
 
 // Simula a lógica de esconder a splash screen
 export const hideSplashScreen = () => {

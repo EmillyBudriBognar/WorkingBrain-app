@@ -50,10 +50,11 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#4D81F7', 
     padding: 18,
+    paddingTop: 35,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    height: 162,
-    marginTop: -30,
+    height: 180,
+    marginTop: -50,
   },
   leftSection: {
     flexDirection: 'row',
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   calendarSection: {
     position: 'absolute',
     right: 16,
-    top: 16,
+    top: 32,
     alignItems: 'center',
     marginTop: 22,
   },
