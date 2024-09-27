@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet, Text, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SimpleHeader from '@/components/SimpleHeader';
-import { goToHome } from './navigation';
+import { goToDesafios, goToHome } from './navigation';
 
 // Array de insígnias com imagens
 const insignias = [
@@ -26,7 +26,7 @@ const splitTitle = (title: string) => {
 const InscricoesScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <SimpleHeader title='Insígnias' onBackPress={goToHome} />
+      <SimpleHeader title='Insígnias' onBackPress={goToDesafios} />
       <ScrollView>
         <View style={styles.insigniasContainer}>
           {insignias.map(insignia => {

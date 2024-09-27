@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SimpleHeader from '@/components/SimpleHeader';
-import { goToHome } from './navigation';
+import { goToDesafios, goToHome } from './navigation';
 
 const desafios = [
   { id: '1', image: require('../assets/images/desafio-diario.png') },
@@ -16,7 +16,7 @@ const desafios = [
 const InscricoesScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <SimpleHeader title='Desafios' onBackPress={goToHome} />
+      <SimpleHeader title='Desafios' onBackPress={goToDesafios} />
       <ScrollView>
         <Text style={styles.sectionHeader}>Desafios Disponíveis</Text>
         <View style={styles.desafiosContainer}>
