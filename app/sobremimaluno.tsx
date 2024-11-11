@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Dimens
 import { useRouter } from 'expo-router';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';  // Import para ícones
-import { goToPreCadastro } from './navigation';
+import { goToPreCadastro, goToHome } from './navigation';
 
 const { width } = Dimensions.get('window');
 
@@ -56,12 +56,12 @@ export default function Cadastro() {
         alert("Por favor, insira um email e senha válidos."); 
       }
     } else {
-      handleFinalize(); // Finaliza o processo
+      handleFinalize(); // Finaliza o processo e redireciona para a tela inicial
     }
   };
   
   const handleFinalize = () => {
-    router.push('/login');
+    goToHome(); // Redireciona para a tela inicial
   };
 
   const handleStepPress = (step: Step) => {
@@ -200,7 +200,7 @@ export default function Cadastro() {
           </TouchableOpacity>
 
           <View style={styles.footer}>
-            <TouchableOpacity onPress={() => router.push('/login')} activeOpacity={0.8}>
+            <TouchableOpacity onPress={goToPreCadastro} activeOpacity={0.8}>
               <Text style={styles.footerText}>
                 Já tem uma conta? <Text style={styles.loginLink}>Login</Text>
               </Text>

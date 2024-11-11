@@ -48,6 +48,12 @@ export const goToProfile= () => {
   hideSplashScreen();
 };
 
+// Função que redireciona para a tela de Sobre Curso
+export const goToTelaCurso = () => {
+  router.replace('./telacurso'); 
+  hideSplashScreen();
+};
+
 // Função que redireciona para a tela de Desafio Diário
 export const goToDesafioDiario = () => {
   router.replace('/desafiodiario'); 
@@ -81,6 +87,12 @@ export const goToVerDesafios = () => {
 // Função que redireciona para a tela de Insígnias
 export const goToInsignias = () => {
   router.replace('/insignias'); 
+  hideSplashScreen();
+};
+
+// Função que redireciona para a tela de Home do Prof
+export const goToProf = () => {
+  router.replace('../prof/(tabs)/homeprof'); 
   hideSplashScreen();
 };
 

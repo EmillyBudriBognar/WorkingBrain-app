@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Alert, TextInput, StyleSheet, TouchableOpacity, Image, Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { goToLogin, goToPreCadastro, goToHome } from "../app/navigation";
+import { goToLogin, goToPreCadastro, goToHome, goToProf } from "../app/navigation";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -65,7 +65,7 @@ const LoginScreen = () => {
         <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} onPress={goToHome}>
+      <TouchableOpacity style={styles.loginButton} onPress={goToProf}>
         <Text style={styles.loginButtonText}>Entrar</Text>
       </TouchableOpacity>
 
