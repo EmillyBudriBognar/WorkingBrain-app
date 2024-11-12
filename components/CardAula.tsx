@@ -1,99 +1,81 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-interface CardProps {
-  imageUrl: any; // Permitir tanto require quanto uri string
-  title: string;
-  subtitle: string;
-  tags: { label: string; color: string }[];
+interface Tag {
+  label: string;
+  color: string;
 }
 
-const CardAula: React.FC<CardProps> = ({ imageUrl, title, subtitle, tags }) => {
-  // Verificar se o imageUrl é uma string (URI) ou um require()
-  const imageSource = typeof imageUrl === 'string' ? { uri: imageUrl } : imageUrl;
+interface CardAulaProps {
+  imageUrl: any;
+  title: string;
+  subtitle: string;
+  tags: Tag[];
+  onPress?: () => void;
+}
 
+const CardAula: React.FC<CardAulaProps> = ({ imageUrl, title, subtitle, tags, onPress }) => {
   return (
-    <View style={styles.cardContainer}>
-      <View style={styles.imageContainer}>
-        {/* Agora a fonte de imagem pode ser tanto uma URI quanto um require */}
-        <Image source={imageSource} style={styles.image} />
-      </View>
-      <View style={styles.contentContainer}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Image source={imageUrl} style={styles.image} />
+      <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
-        <View style={styles.tagContainer}>
+        <View style={styles.tagsContainer}>
           {tags.map((tag, index) => (
-            <Text key={index} style={{ ...styles.tag, backgroundColor: tag.color }}>
-              {tag.label}
-            </Text>
+            <View key={index} style={[styles.tag, { backgroundColor: tag.color }]}>
+              <Text style={styles.tagText}>{tag.label}</Text>
+            </View>
           ))}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+  card: {
+    width: 200,
+    marginHorizontal: 8,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    overflow: 'hidden',
     elevation: 3,
-    flexDirection: "row",
-    overflow: "hidden",
-    backgroundColor: "#fff",
-    margin: 15,
-    marginTop: 2,
-    marginRight: 0,
-    alignItems: "center", // Centraliza o conteúdo verticalmente
-  },
-  imageContainer: {
-    width: 100,
-    height: 130,
-    margin: 5,
   },
   image: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    borderRadius: 10,
+    width: '100%',
+    height: 100,
   },
-  contentContainer: {
-    padding: 10,
-    flex: 1,
-    alignItems: "center", // Centraliza o conteúdo horizontalmente
+  content: {
+    padding: 8,
   },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5, // Espaçamento entre título e subtítulo
-    marginTop: 15,
-    textAlign: "center", // Centraliza o texto no card
+    fontWeight: 'bold',
+    color: '#333',
   },
   subtitle: {
     fontSize: 14,
-    color: "#666",
-    marginBottom: 15, // Espaçamento abaixo do subtítulo
-    textAlign: "center", // Centraliza o texto no card
+    color: '#666',
+    marginVertical: 4,
   },
-  tagContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center", // Centraliza as tags no card
-    marginBottom: 10,
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 4,
   },
   tag: {
-    paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 8,
-    marginRight: 5,
-    marginBottom: 5, // Espaçamento entre os itens de tag
+    paddingHorizontal: 8,
+    borderRadius: 16,
+    marginRight: 4,
+    marginBottom: 4,
+  },
+  tagText: {
     fontSize: 12,
-    color: "#fff",
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    color: '#fff',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 

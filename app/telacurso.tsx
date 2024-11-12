@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import SimpleHeader from '@/components/SimpleHeader';
+import { goToCursoConfirm, goToHome } from './navigation';
 
 // Obter as dimensões da tela para ajuste responsivo
 const { width } = Dimensions.get('window');
@@ -8,17 +10,17 @@ const { width } = Dimensions.get('window');
 const TelaCurso: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={estilos.container}>
-      {/* Cabeçalho do Curso */}
+      <SimpleHeader title='CONTEÚDOS' onBackPress={goToHome} />
       <View style={estilos.cabecalho}>
         <Image source={require('../assets/images/quimica.jpeg')} style={estilos.imagem} />
         <View style={estilos.informacoesCurso}>
-          <Text style={estilos.tituloCurso}>Introdução à Química Orgânica</Text>
+          <Text style={estilos.tituloCurso}>Introdução à Química</Text>
           <View style={estilos.linhaAutor}>
-            <Image source={require('./assets/imagens/quimica.jpeg')} style={estilos.imagemAutor} />
-            <Text style={estilos.nomeAutor}>John Doe</Text>
+            <Image source={require('../assets/images/userprof.jpg')} style={estilos.imagemAutor} />
+            <Text style={estilos.nomeAutor}>Patrícia Ladeira</Text>
           </View>
           <View style={estilos.detalhesCurso}>
-            <Text style={estilos.detalhe}>Fuvest e Enem</Text>
+            <Text style={estilos.detalhe}>Fuvest</Text>
             <Text style={estilos.ponto}>•</Text>
             <Text style={estilos.detalhe}>2h30min</Text>
             <Text style={estilos.ponto}>•</Text>
@@ -27,22 +29,23 @@ const TelaCurso: React.FC = () => {
             <Text style={estilos.detalhe}>Básico</Text>
           </View>
           <Text style={estilos.descricao}>
-            Uma breve descrição do curso. Aqui é onde o texto descritivo deve ser exibido.
+          Explore os fundamentos da Química de forma clara e objetiva, com foco em conteúdos relevantes para vestibulares como Fuvest e Enem. Aprofunde seu conhecimento e esteja preparado para seus exames.
           </Text>
-          <TouchableOpacity style={estilos.botaoMatricular}>
+          <TouchableOpacity style={estilos.botaoMatricular} onPress={goToCursoConfirm}>
             <Text style={estilos.textoMatricular}>ME MATRICULAR</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Conteúdos do Curso */}
-      <View style={estilos.conteudos}>
-        <Text style={estilos.tituloConteudos}>Conteúdos</Text>
-        {dadosConteudos.map((conteudo, index) => (
-          <TouchableOpacity key={index} style={[estilos.itemConteudo, conteudo.completo && estilos.conteudoCompleto]}>
-            <Text style={estilos.indiceConteudo}>{conteudo.indice}</Text>
-            <Text style={estilos.tituloConteudo}>{conteudo.titulo}</Text>
-            <FontAwesome name="play-circle" size={24} color="#333" />
+      {/* Lista de conteúdos do curso */}
+      <View style={estilos.listaConteudos}>
+        {['Introdução ao Curso', 'Aula 1', 'Aula 2', 'Aula 3', 'Aula 4', 'Aula 5'].map((conteudo, index) => (
+          <TouchableOpacity key={index} style={estilos.itemConteudo}>
+            <View style={estilos.numeroConteudo}>
+              <Text style={estilos.textoNumero}>{String(index + 1).padStart(2, '0')}</Text>
+            </View>
+            <Text style={estilos.textoConteudo}>{conteudo}</Text>
+            <FontAwesome name="lock" size={16} color="#8e8e8e" />
           </TouchableOpacity>
         ))}
       </View>
@@ -50,118 +53,102 @@ const TelaCurso: React.FC = () => {
   );
 };
 
-const dadosConteudos = [
-  { indice: '01', titulo: 'Introdução', completo: true },
-  { indice: '02', titulo: 'Vídeo', completo: false },
-  { indice: '03', titulo: 'Vídeo', completo: false },
-  { indice: '04', titulo: 'Vídeo', completo: false },
-  { indice: '05', titulo: 'Vídeo', completo: false },
-  { indice: '06', titulo: 'Vídeo', completo: false },
-];
-
 const estilos = StyleSheet.create({
   container: {
-    padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
   },
   cabecalho: {
-    backgroundColor: '#E0E4FF',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    margin: 16,
+    overflow: 'hidden',
   },
   imagem: {
-    width: width * 0.9,
-    height: width * 0.5,
-    borderRadius: 8,
-    marginBottom: 8,
-    alignSelf: 'center',
+    width: '100%',
+    height: 180,
   },
   informacoesCurso: {
-    marginTop: 8,
+    padding: 16,
   },
   tituloCurso: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#333',
+    marginBottom: 8,
   },
   linhaAutor: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
+    marginBottom: 8,
   },
   imagemAutor: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     marginRight: 8,
   },
   nomeAutor: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#333',
   },
   detalhesCurso: {
     flexDirection: 'row',
-    alignItems: 'center',
     flexWrap: 'wrap',
-    marginVertical: 4,
+    alignItems: 'center',
+    marginBottom: 8,
   },
   detalhe: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#666',
   },
   ponto: {
+    fontSize: 14,
     marginHorizontal: 4,
-    fontSize: 12,
     color: '#666',
   },
   descricao: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 8,
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 16,
   },
   botaoMatricular: {
-    backgroundColor: '#4A90E2',
-    paddingVertical: 8,
-    borderRadius: 4,
+    backgroundColor: '#007bff',
+    paddingVertical: 10,
+    borderRadius: 60,
     alignItems: 'center',
-    marginTop: 12,
   },
   textoMatricular: {
     color: '#fff',
-    fontWeight: 'bold',
-  },
-  conteudos: {
-    backgroundColor: '#F0F0F0',
-    borderRadius: 8,
-    padding: 16,
-  },
-  tituloConteudos: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 8,
+  },
+  listaConteudos: {
+    paddingHorizontal: 16,
   },
   itemConteudo: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    marginBottom: 8,
+    justifyContent: 'space-between',
+    backgroundColor: '#eaeef0',
+    padding: 12,
+    borderRadius: 40,
+    marginVertical: 6,
   },
-  conteudoCompleto: {
-    backgroundColor: '#E0FFE0',
+  numeroConteudo: {
+    backgroundColor: '#a0d2eb',
+    borderRadius: 20,
+    padding: 8,
+    width: 40,
+    alignItems: 'center',
   },
-  indiceConteudo: {
-    fontSize: 16,
+  textoNumero: {
+    color: '#fff',
     fontWeight: 'bold',
-    color: '#4A90E2',
-    marginRight: 16,
   },
-  tituloConteudo: {
+  textoConteudo: {
     flex: 1,
-    fontSize: 14,
+    marginLeft: 16,
+    fontSize: 16,
     color: '#333',
   },
 });

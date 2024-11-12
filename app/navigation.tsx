@@ -12,6 +12,12 @@ export const goToLogin = () => {
   hideSplashScreen();
 };
 
+// Função que redireciona para a tela de login
+export const goToCursoConfirm = () => {
+  router.replace('/cursoconfirm'); 
+  hideSplashScreen();
+};
+
 // Função que redireciona para a tela de Cadastro do Aluno
 export const goToCadastroAluno = () => {
   router.replace('/sobremimaluno'); 
@@ -50,7 +56,7 @@ export const goToProfile= () => {
 
 // Função que redireciona para a tela de Sobre Curso
 export const goToTelaCurso = () => {
-  router.replace('./telacurso'); 
+  router.replace('/telacurso'); 
   hideSplashScreen();
 };
 

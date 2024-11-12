@@ -22,7 +22,7 @@ const HeaderComponent = () => {
         source={require('../assets/images/user.png')} // Caminho correto da imagem local
         style={styles.avatar}
       />
-        <Text style={styles.greetingText}>ALUNO</Text>
+        <Text style={styles.greetingText}>EMILLY BUDRI</Text>
       </View>
 
       {/* Seção Direita: Ícone de Calendário */}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     height: 180,
-    marginTop: -50,
+    marginTop: -33,
   },
   leftSection: {
     flexDirection: 'row',

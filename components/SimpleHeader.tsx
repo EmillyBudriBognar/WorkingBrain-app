@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     height: 120,
-    marginTop: -50,
+    marginTop: -10,
   },
   backButton: {
     padding: 10,

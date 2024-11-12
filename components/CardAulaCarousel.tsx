@@ -1,18 +1,19 @@
 import React from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
-import CardAula from "./CardAula"; 
+import { ScrollView } from "react-native";
+import CardAula from "./CardAula";
+import { goToTelaCurso } from '@/app/navigation'; // Importa a função de navegação existente
 
 const CardAulaCarousel: React.FC = () => {
-
   const cards = [
     {
-      imageUrl: require('../assets/images/quimica.jpeg'), 
+      imageUrl: require('../assets/images/quimica.jpeg'),
       title: "Introdução à Química",
       subtitle: "Prof Patrícia Ladeira",
       tags: [
         { label: "química", color: "#A3D8A2" },
         { label: "fuvest", color: "#CF906F" }
-      ]
+      ],
+      onPress: goToTelaCurso // Usa a função de navegação apenas para o card de "Introdução à Química"
     },
     {
       imageUrl: require('../assets/images/literatura.jpg'),
@@ -53,10 +54,7 @@ const CardAulaCarousel: React.FC = () => {
   ];
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-    >
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {cards.map((card, index) => (
         <CardAula
           key={index}
@@ -64,6 +62,7 @@ const CardAulaCarousel: React.FC = () => {
           title={card.title}
           subtitle={card.subtitle}
           tags={card.tags}
+          onPress={card.onPress} // Passa a função onPress apenas para o card especificado
         />
       ))}
     </ScrollView>
