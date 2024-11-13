@@ -1,3 +1,4 @@
+import { goToDesafioDiario } from '@/app/navigation';
 import React from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, ImageSourcePropType } from 'react-native';
 
@@ -18,7 +19,7 @@ const desafios: Desafio[] = [
 
 const Desafios: React.FC = () => {
   const renderDesafio = ({ item }: { item: Desafio }) => (
-    <TouchableOpacity style={styles.desafioContainer} onPress={() => alert(`Desafio: ${item.id}`)}>
+    <TouchableOpacity style={styles.desafioContainer} onPress={goToDesafioDiario}>
       <Image source={item.image} style={styles.desafioImage} />
     </TouchableOpacity>
   );

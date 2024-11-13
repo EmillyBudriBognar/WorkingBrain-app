@@ -12,8 +12,8 @@ const ProfileScreen = () => {
   // Dados simulados de informações do usuário (viriam de um banco de dados)
   const userInfo = {
     name: userName,
-    email: 'emilly.budri@example.com',
-    phoneNumbers: ['(11) 99999-9999', '(21) 88888-8888'],
+    email: 'emillybudri@gmail.com',
+    phoneNumber: ['(11) 99999-9999'],
   };
 
   // Simulação de busca do nome do usuário de um banco de dados
@@ -42,7 +42,7 @@ const ProfileScreen = () => {
             style={styles.avatar}
           />
           <Text style={styles.name}>{userName}</Text>
-          <Text style={styles.role}>Aluno</Text>
+          <Text style={styles.role}>ALUNO</Text>
         </View>
 
         {/* Resumo de Desempenho */}
@@ -102,8 +102,8 @@ const ProfileScreen = () => {
             {/* Email do Usuário */}
             <Text style={styles.infoText}>Email: {userInfo.email}</Text>
             {/* Telefones do Usuário */}
-            <Text style={styles.infoText}>Telefones:</Text>
-            {userInfo.phoneNumbers.map((number, index) => (
+            <Text style={styles.infoText}>Telefone:</Text>
+            {userInfo.phoneNumber.map((number, index) => (
               <Text key={index}>
                 {number}
               </Text>
