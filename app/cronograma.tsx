@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar, DateData } from 'react-native-calendars';
+import { FontAwesome } from '@expo/vector-icons'; // Importando ícone do FontAwesome
 import SimpleHeader from '@/components/SimpleHeader';
 import { goToHome } from './navigation';
 
@@ -16,23 +17,57 @@ type Events = {
 
 const CronogramaScreen = () => {
   const [selectedDate, setSelectedDate] = useState<string>('');
+
   const events: Events = {
-    '2024-11-21': [{ title: 'Matemática', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-22': [{ title: 'Português', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-25': [{ title: 'História', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-26': [{ title: 'Física', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-27': [{ title: 'Matemática', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-28': [{ title: 'Português', time: '14:00 pm - 15:00 pm' }],
-    '2024-11-29': [{ title: 'História', time: '14:00 pm - 15:00 pm' }],
+    '2024-11-21': [
+      { title: 'Matemática', time: '14:00 pm - 15:00 pm' },
+      { title: 'Inglês', time: '15:00 pm - 16:00 pm' },
+      { title: 'Geografia', time: '16:00 pm - 17:00 pm' },
+    ],
+    '2024-11-22': [
+      { title: 'Português', time: '14:00 pm - 15:00 pm' },
+      { title: 'Biologia', time: '15:00 pm - 16:00 pm' },
+    ],
+    '2024-11-25': [
+      { title: 'História', time: '14:00 pm - 15:00 pm' },
+      { title: 'Matemática', time: '15:00 pm - 16:00 pm' },
+      { title: 'Física', time: '16:00 pm - 17:00 pm' },
+      { title: 'Química', time: '17:00 pm - 18:00 pm' },
+    ],
+    '2024-11-26': [
+      { title: 'Física', time: '14:00 pm - 15:00 pm' },
+      { title: 'Inglês', time: '15:00 pm - 16:00 pm' },
+    ],
+    '2024-11-27': [
+      { title: 'Matemática', time: '14:00 pm - 15:00 pm' },
+      { title: 'História', time: '15:00 pm - 16:00 pm' },
+      { title: 'Português', time: '16:00 pm - 17:00 pm' },
+    ],
+    '2024-11-28': [
+      { title: 'Português', time: '14:00 pm - 15:00 pm' },
+      { title: 'Física', time: '15:00 pm - 16:00 pm' },
+      { title: 'Química', time: '16:00 pm - 17:00 pm' },
+      { title: 'Geografia', time: '17:00 pm - 18:00 pm' },
+    ],
+    '2024-11-29': [
+      { title: 'História', time: '14:00 pm - 15:00 pm' },
+      { title: 'Biologia', time: '15:00 pm - 16:00 pm' },
+    ],
   };
 
   const handleDateSelect = (day: DateData) => {
     setSelectedDate(day.dateString);
   };
 
+  const formatDateToBrazilian = (dateString: string) => {
+    if (!dateString) return 'Selecione uma data';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <SimpleHeader title='cronograma' onBackPress={goToHome} />
+      <SimpleHeader title="cronograma" onBackPress={goToHome} />
       <Calendar
         onDayPress={handleDateSelect}
         markedDates={{
@@ -48,9 +83,11 @@ const CronogramaScreen = () => {
           arrowColor: '#00A8E8',
         }}
       />
-      <Text style={styles.sectionHeader}>Dia {selectedDate || 'Selecione uma data'}</Text>
+      <Text style={styles.sectionHeader}>
+        {selectedDate ? `Dia ${formatDateToBrazilian(selectedDate)}` : formatDateToBrazilian(selectedDate)}
+      </Text>
       <ScrollView>
-        {(events[selectedDate] || []).map((event: Event, index: number) => (
+        {(events[selectedDate] || []).map((event, index) => (
           <View key={index} style={styles.eventItem}>
             <View style={styles.eventCircle} />
             <View>
@@ -61,7 +98,7 @@ const CronogramaScreen = () => {
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.addButton}>
-        <Text style={styles.addButtonText}>+</Text>
+        <FontAwesome name="plus" size={30} color="#FFF" />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -92,9 +129,12 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#ed3b8b',
+    borderWidth: 2,      // Define a largura da borda
+    borderColor: '#ed3b8b', // Define a cor da borda
+    backgroundColor: 'transparent', // Deixa o fundo transparente
     marginRight: 15,
   },
+  
   eventTitle: {
     fontSize: 16,
     fontWeight: '600',
@@ -109,8 +149,8 @@ const styles = StyleSheet.create({
     right: 20,
     width: 80,
     height: 80,
-    borderRadius: 200,
-    backgroundColor: '#00A8E8',
+    borderRadius: 40,
+    backgroundColor: '#4D81F7',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -118,12 +158,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 5,
-  },
-  addButtonText: {
-    color: '#FFF',
-    fontSize: 60,
-    fontWeight: 'bold',
-    marginTop: -8,
   },
 });
 
