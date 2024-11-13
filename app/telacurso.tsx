@@ -24,7 +24,7 @@ const TelaCurso: React.FC = () => {
             <Text style={estilos.ponto}>•</Text>
             <Text style={estilos.detalhe}>2h30min</Text>
             <Text style={estilos.ponto}>•</Text>
-            <Text style={estilos.detalhe}>15 conteúdos</Text>
+            <Text style={estilos.detalhe}>6 conteúdos</Text>
             <Text style={estilos.ponto}>•</Text>
             <Text style={estilos.detalhe}>Básico</Text>
           </View>
